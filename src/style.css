@@ -24,7 +24,7 @@ body {
 }
 
 body {
-  background-color: aliceblue;
+  background-color: rgb(225, 226, 228);
 }
 
 img {
@@ -32,8 +32,9 @@ img {
 }
 
 .top {
-  width: 40%;
+  width: 50%;
   background-color: white;
+  border-radius: 10px;
 }
 
 .listing {
@@ -49,7 +50,7 @@ img {
   border-right: white;
   border-left: white;
   background-image: url(../assets/enter.png);
-  background-size: 10% 85%;
+  background-size: 6% 65%;
   background-position: right;
   background-repeat: no-repeat;
 }
