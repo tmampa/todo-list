@@ -32,7 +32,7 @@ img {
 }
 
 .top {
-  width: 50%;
+  width: 40%;
   background-color: white;
   border-radius: 10px;
 }
@@ -63,7 +63,7 @@ img {
 span {
   white-space: nowrap;
   align-items: start;
-  width: 40%;
+  width: 50%;
 }
 
 .head img {
