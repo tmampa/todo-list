@@ -4,8 +4,8 @@
 
 import _ from 'lodash';
 import './style.css';
-import Icons from './noun_more_712689.png';
-import Icons2 from './Refresh_icon.svg.png';
+import Icons from '..assets/more.png';
+import Icons2 from '../assets/refresh.png';
 import isCompleted from './complete.js';
 
 class Actions {
