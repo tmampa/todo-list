@@ -4,9 +4,9 @@
 
 import _ from 'lodash';
 import './style.css';
-import Icons from '..assets/more.png';
+import Icons from '../assets/more.png';
 import Icons2 from '../assets/refresh.png';
-import isCompleted from './complete.js';
+import isCompleted from './complete';
 
 class Actions {
   constructor(des, com, nums) {
