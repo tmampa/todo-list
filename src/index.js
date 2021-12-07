@@ -1,5 +1,5 @@
 import './style.css';
-import { saveLocalStorage, updateCompleted } from './active.js';
+import { saveLocalStorage, updateCompleted } from './active';
 
 let items = [
   {
