@@ -1,40 +1,90 @@
+/* eslint-disable no-loop-func */
 import './style.css';
-import { saveLocalStorage, updateCompleted } from './active';
+import status from './status.js';
+import {
+  addTask, editTask, deleteTask, clearChecked,
+} from './add_remove.js';
 
-let items = [
-  {
-    description: 'wash the dishes',
-    completed: true,
-    index: 0,
-  },
-  {
-    description: 'complete To Do List project',
-    completed: false,
-    index: 1,
-  },
-];
+const mainList = document.getElementById('main-list');
+const clearAll = document.getElementById('clear');
 
-const storageData = JSON.parse(localStorage.getItem('toDoStorage'));
-if (storageData) {
-  items = storageData;
+let myTasks = [];
+
+// Save to local storage
+function saveToStorage(taskArray) {
+  localStorage.setItem('tasks', JSON.stringify(taskArray));
 }
 
-const todos = document.querySelector('.todos');
-items.forEach((item) => {
-  const html = `<input type="checkbox">
-  <input value=${item.description} type="text"></input>
-  <i class="fas fa-ellipsis-v"></i>`;
-  const div = document.createElement('div');
-  div.innerHTML = html;
-  const input = div.querySelector('input[type=checkbox]');
-  input.checked = item.completed;
-  div.classList.add('todo-item');
-  div.id = item.index;
+// Display Tasks
+function displayTasks() {
+  mainList.innerHTML = '';
+  myTasks.forEach((myTask) => {
+    const content = `<div class="list-input"><input type="checkbox"> <p class="description">${myTask.description}</p></div><span><i class="far fa-trash-alt"></i></span>`;
 
-  input.addEventListener('change', () => {
-    updateCompleted(item, input);
-    saveLocalStorage(items);
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `${content}`;
+    listItem.className = 'list-item';
+    mainList.appendChild(listItem);
+
+    const listInput = listItem.firstChild;
+    const checkbox = listInput.firstChild;
+    const para = listInput.lastChild;
+    const trashIcon = listInput.nextSibling.firstChild;
+
+    // Update checkbox status
+    checkbox.checked = myTask.completed;
+    checkbox.addEventListener('change', () => {
+      status(checkbox, myTask);
+      saveToStorage(myTasks);
+    });
+
+    // Edit task
+    para.addEventListener('dblclick', () => {
+      para.setAttribute('contenteditable', 'true');
+      para.parentElement.classList.add('inputEdit');
+      editTask(para, myTask, myTasks);
+    });
+
+    trashIcon.addEventListener('click', () => {
+      deleteTask(myTasks, myTask);
+      displayTasks();
+      window.location.reload();
+    });
   });
+}
 
-  todos.appendChild(div);
+clearAll.addEventListener('click', () => {
+  clearChecked(myTasks);
+  window.location.reload();
 });
+
+// Add new task with enter icon
+const enterBtn = document.getElementById('enter');
+enterBtn.onclick = () => {
+  addTask(myTasks);
+  displayTasks();
+};
+
+// Add new task with enter keypress
+const inputList = document.getElementById('inputList');
+inputList.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    addTask(myTasks);
+    displayTasks();
+  }
+});
+
+// Get from local storage
+function getFromStorage() {
+  const local = JSON.parse(localStorage.getItem('tasks'));
+  if (local) {
+    myTasks = local;
+  }
+  if (myTasks.length === 0) {
+    mainList.innerHTML = '<li class="list-item"><div class="list-input"><p>To-Do List is empty.</p></div></li>';
+  } else {
+    displayTasks();
+  }
+}
+
+window.onload = getFromStorage();
