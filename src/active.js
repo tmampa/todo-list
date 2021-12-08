@@ -1,4 +1,3 @@
-
 export const saveLocalStorage = (data) => {
   const todoItems = document.querySelectorAll('.todo-item');
   todoItems.forEach((item, idx) => {
