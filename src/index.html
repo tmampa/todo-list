@@ -1,26 +1,28 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/4f02d055e5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <title>To Do List</title>
 </head>
 <body>
     <main>
-        <div class="to-do">
-            <div class="today">
-                <h1>Today's To Do</h1><span><i class="fas fa-sync-alt"></i></span>
+        <div class="card">
+            <div class="list-head">
+                <p>Today's To Do</p>
+                <i class="fas fa-sync"></i>
             </div>
-            <form id="form-id" class="add-text">
-                <input type="text" placeholder="Add to your list"><span><i class="fas fa-level-down-alt fa-rotate-90"></i></span>
-            </form>
-            <div class="todos">
-               
+            <div class="list-head">
+                <input type="text" placeholder="Add to your list..." id="inputList">
+                <i class="fas fa-level-down-alt" id="enter"></i>
             </div>
-            <div class="button">
-                <button id="button">clear all completed</button>
+            <div>
+                <ul id="main-list">
+                </ul>
+            </div>
+            <div class="clear-all">
+                <p><a href="#" id="clear">Clear all completed</a></p>
             </div>
         </div>
     </main>

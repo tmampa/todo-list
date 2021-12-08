@@ -1,80 +1,89 @@
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 body {
-  background-color: gray;
+  background-color: #f1f2f5;
 }
 
-.to-do {
-  position: absolute;
-  left: 40%;
-  top: 40%;
-  right: 40%;
-  box-shadow: 4px 6px gray;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  background-color: rgb(247, 240, 240);
+.card {
+  background-color: white;
+  width: 45%;
+  margin: 100px auto 0 auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.to-do .today {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 10px;
-  color: rgb(110, 106, 106);
+.list-head,
+.list-item {
   display: flex;
   justify-content: space-between;
-  padding: 15px 15px;
-  background-color: #fff;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.to-do .add-text {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 15px;
-  background-color: #fff;
-}
-
-.to-do .add-text input {
-  font-style: italic;
-}
-
-.to-do .todos {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.to-do .todo-item {
-  display: flex;
-  gap: 20px;
-  background-color: #fff;
-  padding: 15px 15px;
-}
-
-.to-do input[type=text] {
+#inputList {
+  outline: none;
   border: none;
-  background-color: transparent;
   font-size: 1rem;
+  font-style: italic;
+  opacity: 0.6;
+  width: 100%;
 }
 
-.to-do .todo-item input[type=text] {
-  flex-grow: 1;
-}
-
-.to-do .button {
-  display: flex;
-  justify-content: center;
-  background-color: rgb(199, 195, 195);
-  padding: 10px;
-}
-
-.to-do .button button {
+.inputEdit {
+  outline: none;
   border: none;
-  background-color: transparent;
-  font-size: 1.2rem;
-  color: rgb(121, 116, 116);
+  font-size: 1rem;
+  font-style: italic;
+  opacity: 0.8;
+  padding: 10px;
+  width: 100%;
+  background-color: rgb(240, 218, 190);
+}
+
+.description {
+  padding: 0 10px;
+}
+
+.fa-level-down-alt {
+  transform: rotate(90deg);
+  font-size: 12px;
+}
+
+#main-list {
+  color: black;
+  list-style: none;
+  padding: 0;
+}
+
+p,
+ul {
+  margin: 0;
+}
+
+.list-input {
+  display: flex;
+}
+
+input {
+  margin-right: 10px;
+}
+
+.clear-all {
+  background-color: #f1f2f5;
+  padding: 15px;
+  text-align: center;
+}
+
+.fas,
+.far,
+.clear-all a {
+  text-decoration: none;
+  color: black;
+  opacity: 0.4;
+}
+
+.fas:hover,
+.far:hover,
+.clear-all a:hover {
+  text-decoration: underline;
+  color: black;
+  opacity: 0.8;
 }

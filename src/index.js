@@ -1,64 +1,90 @@
+/* eslint-disable no-loop-func */
 import './style.css';
-import { saveLocalStorage, updateCompleted } from './active';
+import status from './status.js';
 import {
-  editTodo, removeTodos, addTodo, clearCompletedTodos,
-} from './add';
+  addTask, editTask, deleteTask, clearChecked,
+} from './add_remove.js';
 
-let itemsArray = [];
+const mainList = document.getElementById('main-list');
+const clearAll = document.getElementById('clear');
 
-const storageData = JSON.parse(localStorage.getItem('toDoStorage'));
-if (storageData) {
-  itemsArray = storageData;
+let myTasks = [];
+
+// Save to local storage
+function saveToStorage(taskArray) {
+  localStorage.setItem('tasks', JSON.stringify(taskArray));
 }
 
-const todos = document.querySelector('.todos');
-itemsArray.forEach((item) => {
-  const html = `<input type="checkbox">
-  <input class="edit" value=${item.description} type="text"></input>
-  <i class="fas fa-ellipsis-v vertical"></i>
-  <i class="fas fa-trash-alt trash"></i>`;
-  const div = document.createElement('div');
-  div.innerHTML = html;
-  const input = div.querySelector('input[type=checkbox]');
-  input.checked = item.completed;
-  div.classList.add('todo-item');
-  div.id = item.index;
+// Display Tasks
+function displayTasks() {
+  mainList.innerHTML = '';
+  myTasks.forEach((myTask) => {
+    const content = `<div class="list-input"><input type="checkbox"> <p class="description">${myTask.description}</p></div><span><i class="far fa-trash-alt"></i></span>`;
 
-  input.addEventListener('change', () => {
-    updateCompleted(item, input);
-    saveLocalStorage(itemsArray);
-  });
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `${content}`;
+    listItem.className = 'list-item';
+    mainList.appendChild(listItem);
 
-  todos.appendChild(div);
-  const vertical = div.querySelector('.vertical');
-  const trash = div.querySelector('.trash');
-  const edit = div.querySelector('.edit');
-  edit.addEventListener('change', () => {
-    editTodo(itemsArray, div.id, edit.value);
-    saveLocalStorage(itemsArray);
-  });
-  vertical.addEventListener('click', () => {
-    vertical.style.display = 'none';
-    trash.style.display = 'block';
-  });
-  trash.addEventListener('click', () => {
-    div.remove();
-    itemsArray = itemsArray.filter((i) => removeTodos(i, div.id));
-    saveLocalStorage(itemsArray);
-  });
-});
+    const listInput = listItem.firstChild;
+    const checkbox = listInput.firstChild;
+    const para = listInput.lastChild;
+    const trashIcon = listInput.nextSibling.firstChild;
 
-const form = document.getElementById('form-id');
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const { value } = form.querySelector('input');
-  addTodo(itemsArray, value);
-  saveLocalStorage(itemsArray);
+    // Update checkbox status
+    checkbox.checked = myTask.completed;
+    checkbox.addEventListener('change', () => {
+      status(checkbox, myTask);
+      saveToStorage(myTasks);
+    });
+
+    // Edit task
+    para.addEventListener('dblclick', () => {
+      para.setAttribute('contenteditable', 'true');
+      para.parentElement.classList.add('inputEdit');
+      editTask(para, myTask, myTasks);
+    });
+
+    trashIcon.addEventListener('click', () => {
+      deleteTask(myTasks, myTask);
+      displayTasks();
+      window.location.reload();
+    });
+  });
+}
+
+clearAll.addEventListener('click', () => {
+  clearChecked(myTasks);
   window.location.reload();
 });
 
-const clearButton = document.querySelector('#button');
-clearButton.addEventListener('click', () => {
-  itemsArray = clearCompletedTodos(itemsArray);
-  saveLocalStorage(itemsArray);
+// Add new task with enter icon
+const enterBtn = document.getElementById('enter');
+enterBtn.onclick = () => {
+  addTask(myTasks);
+  displayTasks();
+};
+
+// Add new task with enter keypress
+const inputList = document.getElementById('inputList');
+inputList.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    addTask(myTasks);
+    displayTasks();
+  }
 });
+
+// Get from local storage
+function getFromStorage() {
+  const local = JSON.parse(localStorage.getItem('tasks'));
+  if (local) {
+    myTasks = local;
+  }
+  if (myTasks.length === 0) {
+    mainList.innerHTML = '<li class="list-item"><div class="list-input"><p>To-Do List is empty.</p></div></li>';
+  } else {
+    displayTasks();
+  }
+}
+
+window.onload = getFromStorage();
