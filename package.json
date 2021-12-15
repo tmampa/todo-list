@@ -1,28 +1,29 @@
-{"name": "todo-list",
-"version": "1.0.0",
-"description": "",
-"main": "webpack.config.js",
-"scripts": {
-  "test": "echo \"Error: no test specified\" && exit 1",
-  "start": "webpack serve --open",
-  "build": "webpack"
-},
-"repository": {
-  "type": "git",
-  "url": "git+https://github.com/tmampa/todo-list.git"
-},
-"author": "",
-"license": "ISC",
-"bugs": {
-  "url": "https://github.com/tmampa/todo-list/issues"
-},
-"homepage": "https://github.com/tmampa/todo-list#readme",
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "jest",
+    "start": "webpack serve --open",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmampa/todo-list.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tmampa/todo-list/issues"
+  },
+  "homepage": "https://github.com/tmampa/todo-list#readme",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.15.0",
     "@types/jest": "^27.0.1",
     "css-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
-    "jest": "^27.0.6",
+    "jest": "^27.4.5",
     "style-loader": "^3.2.1",
     "webpack": "^5.50.0",
     "webpack-cli": "^4.8.0",
