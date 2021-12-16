@@ -13,7 +13,8 @@
 - Webpack
 
 # live demo
-Soon
+
+- https://tmampa.github.io/todo-list/dist
 
 ## Getting Started
 
@@ -45,6 +46,12 @@ To get a local copy up and running follow these simple example steps:
 - GitHub: [@tmampa](https://github.com/tmampa)
 - Twitter: [@tshephangm_](https://twitter.com/tshephangm_)
 - LinkedIn: [Tshephang Mampa](https://linkedin.com/in/tshephangmampa)
+
+👤 **Affaxed Kiprotich**
+
+- GitHub: [@DelhinRharl](https://github.com/DelhinRharl)
+- Twitter: [@tdelhinrharl](https://twitter.com/delhinrharl)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/AffaxedKiprotich)
 
 ## 🤝 Contributing
 
